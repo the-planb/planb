@@ -8,7 +8,8 @@
       "PlanB\\": "src/"
     },
     "files": [
-      "src/Resources/functions/types.php"
+      "src/Resources/functions/types.php",
+      "src/Resources/functions/arrays.php"
     ]
   },
   "autoload-dev": {

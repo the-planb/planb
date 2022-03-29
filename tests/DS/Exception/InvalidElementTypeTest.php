@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PlanB\Tests\DS\DataMap\Exception;
+namespace PlanB\Tests\DS\Exception;
 
 use PHPUnit\Framework\TestCase;
-use PlanB\DS\DataMap\Exception\InvalidElementType;
+use PlanB\DS\Exception\InvalidElementType;
 
 final class InvalidElementTypeTest extends TestCase
 {

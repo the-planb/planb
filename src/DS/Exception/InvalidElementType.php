@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PlanB\DS\DataMap\Exception;
+namespace PlanB\DS\Exception;
 
 use RuntimeException;
 
@@ -11,7 +11,6 @@ final class InvalidElementType extends RuntimeException
     private function __construct(mixed $value, array $expected)
     {
         $message = $this->parseMessage($value, $expected);
-
 
         parent::__construct($message);
     }

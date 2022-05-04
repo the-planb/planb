@@ -1,0 +1,12 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PlanB\Tests\Validation\Constraint;
+
+use Symfony\Component\Validator\Constraint;
+
+final class Auto extends Constraint
+{
+
+}

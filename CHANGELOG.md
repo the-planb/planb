@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/the-planb/planb/compare/v1.0.0...v1.1.0) (2024-10-28)
+
+
+### Features
+
+* Upgrade symfony 7.1 y phpunit 11.4 ([c0d687c](https://github.com/the-planb/planb/commit/c0d687ced888882da2c21ea2df8468f8c78d47ff))
+
 ## 1.0.0 (2024-07-25)
 
 

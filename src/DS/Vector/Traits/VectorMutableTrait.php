@@ -20,7 +20,7 @@ trait VectorMutableTrait
      */
     public function addAll(iterable $input): static
     {
-        $data = $this->dealingData($input);
+        $data = $this->sanitize($input);
         $this->data = [
             ...$this->data,
             ...$data,
@@ -45,7 +45,7 @@ trait VectorMutableTrait
      */
     public function insert(int $index, mixed ...$values): static
     {
-        $data = $this->dealingData($values);
+        $data = $this->sanitize($values);
         array_splice($this->data, $index, 0, $data);
 
         return $this;

@@ -33,7 +33,6 @@
     "ext-ctype": "*",
     "ext-iconv": "*",
     "dg/bypass-finals": "^1.8",
-    "laminas/laminas-filter": "^2.5",
     "symfony/validator": "^7.1",
     "jetbrains/phpstorm-attributes": "^1.0",
     "symfony/string": "^7.1"

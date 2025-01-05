@@ -10,7 +10,6 @@ use stdClass;
 
 final class TypeOfTest extends TestCase
 {
-
     #[DataProvider('typeOfProvider')]
     public function test_type_of_function_returns_the_right_type(mixed $val, string $expected)
     {
@@ -24,7 +23,7 @@ final class TypeOfTest extends TestCase
 
         return [
             [new stdClass(), stdClass::class],
-            [fn() => true, 'callable'],
+            [fn () => true, 'callable'],
             [opendir(__DIR__), 'resource'],
             [$resource, 'resource'],
             [null, 'null'],

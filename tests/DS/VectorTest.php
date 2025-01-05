@@ -14,19 +14,28 @@ use PlanB\Tests\DS\Traits\Assertions;
 use PlanB\Tests\DS\Traits\ObjectMother;
 use function array_is_list;
 
-
 final class VectorTest extends TestCase
 {
     use ObjectMother;
     use Assertions;
 
-//CORE
+    //CORE
     public function test_it_can_be_instantiate()
     {
         $vector = Vector::collect();
         $this->assertInstanceOf(Vector::class, $vector);
         $this->assertInstanceOf(CollectionInterface::class, $vector);
         $this->assertInstanceOf(VectorInterface::class, $vector);
+    }
+
+    public function test_it_can_be_instantiate_using_a_mapping_function()
+    {
+        $vector = Vector::collect([1, 2, 3], fn(int $i) => str_repeat('*', $i));
+        $this->assertEquals([
+            '*',
+            '**',
+            '***',
+        ], $vector->toArray());
     }
 
     public function test_it_is_a_array_list()
@@ -36,7 +45,7 @@ final class VectorTest extends TestCase
         $this->assertTrue(array_is_list($vector->toArray()));
     }
 
-//INFO
+    //INFO
     public function test_it_knows_if_has_an_index()
     {
         $vector = $this->give_me_a_vector();
@@ -45,7 +54,7 @@ final class VectorTest extends TestCase
         $this->assertFalse($vector->hasIndex(4));
     }
 
-//MODIFICATION
+    //MODIFICATION
     public function test_it_can_be_mapped()
     {
         $vector = $this->give_me_a_vector();

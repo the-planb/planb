@@ -16,14 +16,13 @@ use PlanB\DS\Vector\VectorInterface;
 use PlanB\DS\Vector\VectorMutable;
 use Prophecy\PhpUnit\ProphecyTrait;
 
-trait  ObjectMother
+trait ObjectMother
 {
     use ProphecyTrait;
 
-    private function give_me_a_typed_collection(iterable $input = [], array $types = [], bool $filter = true): CollectionInterface
+    private function give_me_a_typed_collection(iterable $input = [], array $types = []): CollectionInterface
     {
-        return new #[ElementType('string', DateTime::class)] class($input, $types, $filter) extends Collection {
-
+        return new #[ElementType('string', DateTime::class)] class ($input, null, $types) extends Collection {
         };
     }
 
@@ -32,16 +31,11 @@ trait  ObjectMother
         return $this->give_me_a_collection([]);
     }
 
-    private function give_me_a_collection(?iterable $input = null, array $types = [], bool $filter = true): CollectionInterface
+    private function give_me_a_collection(?iterable $input = null, array $types = []): CollectionInterface
     {
         $input = is_null($input) ? $this->give_me_an_array() : $input;
 
-        return new  class($input, $types, $filter) extends Collection {
-
-            public static function collect(iterable $input = []): static
-            {
-                return new static($input);
-            }
+        return new class ($input, null, $types) extends Collection {
         };
     }
 
@@ -74,17 +68,15 @@ trait  ObjectMother
         return Map::collect([]);
     }
 
-    private function give_me_a_mutable_and_typed_map(iterable $input = [], array $types = [], bool $filter = true): MapMutable
+    private function give_me_a_mutable_and_typed_map(iterable $input = [], array $types = []): MapMutable
     {
-        return new #[ElementType('string')] class($input, $types, $filter) extends MapMutable {
-
+        return new #[ElementType('string')] class ($input, null, $types) extends MapMutable {
         };
     }
 
-    private function give_me_a_mutable_and_typed_vector(iterable $input = [], array $types = [], bool $filter = true): VectorMutable
+    private function give_me_a_mutable_and_typed_vector(iterable $input = [], array $types = []): VectorMutable
     {
-        return new #[ElementType('string')] class($input, $types, $filter) extends VectorMutable {
-
+        return new #[ElementType('string')] class ($input, null, $types) extends VectorMutable {
         };
     }
 

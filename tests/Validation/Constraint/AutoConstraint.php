@@ -8,5 +8,4 @@ use Symfony\Component\Validator\Constraint;
 
 final class AutoConstraint extends Constraint
 {
-
 }

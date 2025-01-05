@@ -9,7 +9,6 @@ use PlanB\DS\Exception\InvalidElementType;
 
 final class InvalidElementTypeTest extends TestCase
 {
-
     public function test_it_is_instantiable()
     {
         $exception = InvalidElementType::make($this, []);

@@ -9,7 +9,6 @@ use PlanB\Validation\Traits\Exception\ConstraintNotFoundException;
 
 final class ConstraintNotFoundExceptionTest extends TestCase
 {
-
     public function test_it_is_instantiable()
     {
         $exception = ConstraintNotFoundException::make('CLASS', 'CONSTRAINT');

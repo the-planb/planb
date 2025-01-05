@@ -18,18 +18,4 @@ class Vector extends Collection implements VectorImmutableInterface
      * @use VectorTrait<Key, Value>
      */
     use VectorTrait;
-
-    final public function __construct(iterable $input = [], array $types = [], bool $filter = true)
-    {
-        parent::__construct($input, $types, $filter);
-    }
-
-    /**
-     * @param Value[] $input
-     */
-    public static function collect(iterable $input = []): static
-    {
-        return new static($input);
-    }
-
 }

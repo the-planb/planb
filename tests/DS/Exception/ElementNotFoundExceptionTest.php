@@ -9,7 +9,6 @@ use PlanB\DS\Exception\ElementNotFoundException;
 
 final class ElementNotFoundExceptionTest extends TestCase
 {
-
     public function test_it_is_instantiable_for_keys()
     {
         $exception = ElementNotFoundException::missingKey('key');

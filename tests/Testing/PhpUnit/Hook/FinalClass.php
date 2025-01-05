@@ -6,5 +6,4 @@ namespace PlanB\Tests\Testing\PhpUnit\Hook;
 
 final class FinalClass
 {
-
 }

@@ -45,7 +45,7 @@ trait VectorTrait
      */
     public function toMap(callable $callback): Map
     {
-        return (new Map($this->data, $this->types, $this->filterInput))
+        return (new Map($this->data, null, $this->types))
             ->mapKeys($callback);
     }
 

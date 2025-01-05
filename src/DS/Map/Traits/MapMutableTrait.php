@@ -20,7 +20,7 @@ trait MapMutableTrait
      */
     public function putAll(iterable $input): static
     {
-        $data = $this->dealingData($input);
+        $data = $this->sanitize($input);
         $this->data = [
             ...$this->data,
             ...$data,

@@ -19,7 +19,6 @@ use PlanB\Tests\DS\Traits\ObjectMother;
 use PlanB\Type\ArrayValue;
 use stdClass;
 
-
 final class CollectionTest extends TestCase
 {
     use ObjectMother;
@@ -56,7 +55,7 @@ final class CollectionTest extends TestCase
         $this->assertEquals([
             'string',
             DateTime::class,
-            'int'
+            'int',
 
         ], $collection->getAllowedTypes());
     }
@@ -64,7 +63,7 @@ final class CollectionTest extends TestCase
     public function test_it_discard_the_nulls_values()
     {
         $collection = $this->give_me_a_collection([
-            null, 'a', 'b', null, 'c'
+            null, 'a', 'b', null, 'c',
         ], ['string']);
 
         $this->assertEquals(['a', 'b', 'c'], array_values($collection->toArray()));
@@ -73,23 +72,19 @@ final class CollectionTest extends TestCase
     public function test_it_allows_nulls_values_when_null_type_is_present()
     {
         $collection = $this->give_me_a_collection([
-            null, 'a', 'b', null, 'c'
+            null, 'a', 'b', null, 'c',
         ], ['string', 'null']);
 
         $this->assertEquals([null, 'a', 'b', null, 'c'], array_values($collection->toArray()));
     }
 
-    public function test_it_throws_an_exception_when_input_has_null_values_and_it_is_not_filtered()
+    public function test_it_remove_null_values_by_default()
     {
-        $this->expectException(InvalidElementType::class);
+        $collection = $this->give_me_a_collection([
+            null, 'a', 'b', null, 'c',
+        ], ['string']);
 
-        $this->give_me_a_collection(
-            input: [
-                null, 'a', 'b', null, 'c'
-            ],
-            types: ['string'],
-            filter: false
-        );
+        $this->assertEquals(['a', 'b', 'c'], array_values($collection->toArray()));
     }
 
     //CORE
@@ -111,6 +106,19 @@ final class CollectionTest extends TestCase
         ]);
 
         $this->assertInstanceOf(CollectionInterface::class, $collection);
+    }
+
+
+    public function test_it_is_normalizable()
+    {
+        $collection = Vector::collect([
+            'a',
+            'b',
+        ]);
+
+        $collection = $collection->normalize(strtoupper(...), ord(...));
+
+        $this->assertEquals([65, 66], $collection->toArray());
     }
 
     public function test_it_is_instantiable_using_a_traversable_like_input()
@@ -610,7 +618,7 @@ final class CollectionTest extends TestCase
         $expected = $this->give_me_a_collection([
             'A' => 'AAAA',
             'B' => 'AAAAAA',
-            'C' => 'AAAAAAAA'
+            'C' => 'AAAAAAAA',
         ]);
 
         $this->assertEquals($expected, $collection->unique(fn(string $value) => strlen($value)));
@@ -802,6 +810,3 @@ final class CollectionTest extends TestCase
     }
 
 }
-
-
-

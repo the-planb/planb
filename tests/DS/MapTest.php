@@ -18,7 +18,7 @@ final class MapTest extends TestCase
     use ObjectMother;
     use Assertions;
 
-//CORE
+    //CORE
     public function test_it_can_be_instantiate()
     {
         $map = Map::collect();
@@ -27,7 +27,17 @@ final class MapTest extends TestCase
         $this->assertInstanceOf(MapInterface::class, $map);
     }
 
-//INFO
+    public function test_it_can_be_instantiate_using_a_mapping_function()
+    {
+        $vector = Map::collect([1, 2, 3], fn(int $i) => str_repeat('*', $i));
+        $this->assertEquals([
+            '*',
+            '**',
+            '***',
+        ], $vector->toArray());
+    }
+
+    //INFO
     public function test_it_knows_if_has_a_key()
     {
         $map = $this->give_me_a_map();
@@ -71,7 +81,6 @@ final class MapTest extends TestCase
         $expected = ['BEATRIZ' => 'beatriz', 'MARIA' => 'maria', 'ANA' => 'ana'];
 
         $class = new #[ElementType('string')] class extends Map {
-
             public function normalizeKey(mixed $value, string|int $key): string|int
             {
                 return strtoupper($value);
@@ -141,7 +150,7 @@ final class MapTest extends TestCase
             'd' => 'value/D',
         ]);
 
-        $callback = fn(string $value, string $key,) => strtolower($key);
+        $callback = fn(string $value, string $key) => strtolower($key);
         $mapped = $map->mapKeys($callback);
 
         $this->assertEquals($expected, $mapped);

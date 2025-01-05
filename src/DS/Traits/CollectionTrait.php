@@ -29,7 +29,7 @@ trait CollectionTrait
     private function replicate(iterable $input = []): static
     {
         /** @phpstan-ignore-next-line */
-        return new static($input, $this->types, $this->filterInput);
+        return new static($input, null, $this->types);
     }
 
     /**

@@ -9,7 +9,6 @@ use PlanB\DS\Vector\VectorInterface;
 
 trait Assertions
 {
-
     private function assertCollectionHasNotChange(CollectionInterface $collection)
     {
         $input = $this->give_me_an_array();

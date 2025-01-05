@@ -13,6 +13,7 @@ use PlanB\DS\Vector\VectorInterface;
 /**
  * @template Key of string|int
  * @template Value
+ * @phpstan-consistent-constructor
  */
 abstract class Collection implements CollectionInterface
 {
@@ -26,36 +27,51 @@ abstract class Collection implements CollectionInterface
      */
     protected readonly array $types;
 
-    protected readonly bool $filterInput;
-
     protected array $data;
 
     /**
      * @param Value[] $input
      * @param string[] $types
-     * @param bool $filter
      */
-    public function __construct(iterable $input = [], array $types = [], bool $filter = true)
+    public function __construct(iterable $input = [], callable $mapping = null, array $types = [])
     {
-        $elementType = ElementType::fromClass(static::class)
-            ->merge(...$types);
+        $this->types = ElementType::fromClass(static::class)
+            ->merge(...$types)
+            ->getTypes();
 
-        $this->types = $elementType->getTypes();
-        $this->filterInput = $filter;
+        $input = iterable_to_array($input);
+        $input = is_callable($mapping) ?
+            array_map($mapping, array_values($input), array_keys($input)) :
+            $input;
 
-        if ($filter && !in_array('null', $this->types)) {
-            $input = array_filter(iterable_to_array($input), fn ($value) => !is_null($value));
-        }
-
-        $this->data = $this->dealingData($input);
+        $this->data = $this->sanitize($input);
     }
 
-    protected function dealingData(iterable $input): array
+    public static function collect(iterable $input = [], callable $mapping = null): static
     {
-        $input = iterable_to_array($input);
+        return new static($input, $mapping);
+    }
+
+    public function normalize(callable ...$callback): static
+    {
+        $input = $this->toArray();
+        foreach ($callback as $normalizer) {
+            $input = array_map($normalizer, $input);
+        }
+
+        return new static($input);
+    }
+
+    protected function sanitize(array $input): array
+    {
         $data = [];
+        $ignoreNullValues = !in_array('null', $this->types);
 
         foreach ($input as $key => $value) {
+            if ($ignoreNullValues && $value === null) {
+                continue;
+            }
+
             is_of_the_type($value, ...$this->types) || throw InvalidElementType::make($value, $this->types);
 
             $newKey = $this instanceof MapInterface ? $this->normalizeKey($value, $key) : $key;

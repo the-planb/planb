@@ -52,14 +52,16 @@ abstract class Collection implements CollectionInterface
         return new static($input, $mapping);
     }
 
-    public function normalize(callable ...$callback): static
+    public static function fromCartesian(callable $callback, iterable ...$inputs): static
     {
-        $input = $this->toArray();
-        foreach ($callback as $normalizer) {
-            $input = array_map($normalizer, $input);
+        $cartesian = cartesian_product(...$inputs);
+
+        $temp = [];
+        foreach ($cartesian as $params) {
+            $temp[] = $callback(...$params);
         }
 
-        return new static($input);
+        return new static($temp);
     }
 
     protected function sanitize(array $input): array

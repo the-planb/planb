@@ -108,7 +108,6 @@ final class CollectionTest extends TestCase
         $this->assertInstanceOf(CollectionInterface::class, $collection);
     }
 
-
     public function test_it_is_normalizable()
     {
         $collection = Vector::collect([
@@ -129,6 +128,16 @@ final class CollectionTest extends TestCase
 
         $this->assertEquals($data, $collection->toArray());
         $this->assertInstanceOf(CollectionInterface::class, $collection);
+    }
+
+    public function test_it_is_instantiable_using_the_cartesian_product_of_some_arrays()
+    {
+        $collection = Vector::fromCartesian(function (int $a, int $b, int $c) {
+            return $a + $b + $c;
+        }, [1, 2], [10, 20], \vector([100, 200]));
+
+        $this->assertInstanceOf(CollectionInterface::class, $collection);
+        $this->assertEquals([111, 211, 121, 221, 112, 212, 122, 222], $collection->toArray());
     }
 
     public function test_it_can_be_used_in_a_loop()

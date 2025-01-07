@@ -1,6 +1,6 @@
 <?php
 
-if (! function_exists('iterable_to_array')) {
+if (!function_exists('iterable_to_array')) {
     function iterable_to_array(iterable $input, bool $preserve_keys = true): array
     {
         if ($input instanceof Traversable) {
@@ -11,7 +11,7 @@ if (! function_exists('iterable_to_array')) {
     }
 }
 
-if (! function_exists('array_flatten')) {
+if (!function_exists('array_flatten')) {
     function array_flatten(iterable $input, int $depth = PHP_INT_MAX): array
     {
         $data = [];
@@ -19,7 +19,7 @@ if (! function_exists('array_flatten')) {
         foreach ($input as $item) {
             $item = is_iterable($item) ? iterable_to_array($item) : $item;
 
-            if (! is_array($item)) {
+            if (!is_array($item)) {
                 $data[] = $item;
             } else {
                 $values = $depth === 1
@@ -36,12 +36,12 @@ if (! function_exists('array_flatten')) {
     }
 }
 
-if (! function_exists('array_collapse')) {
+if (!function_exists('array_collapse')) {
     function array_collapse(
         iterable $input,
-        int $depth = PHP_INT_MAX,
-        string $glue = DIRECTORY_SEPARATOR,
-        string $carry = ''
+        int      $depth = PHP_INT_MAX,
+        string   $glue = DIRECTORY_SEPARATOR,
+        string   $carry = ''
     ): array {
         $temp = [];
 
@@ -54,5 +54,24 @@ if (! function_exists('array_collapse')) {
         }
 
         return $temp;
+    }
+}
+
+if (!function_exists('cartesian_product')) {
+    function cartesian_product(iterable ...$inputs): array
+    {
+        $params = [[]];
+
+        foreach ($inputs as $input) {
+            $temp = [];
+            foreach ($params as $partial) {
+                foreach ($input as $element) {
+                    $temp[] = array_merge($partial, [$element]);
+                }
+            }
+            $params = $temp;
+        }
+
+        return $params;
     }
 }

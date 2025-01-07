@@ -17,7 +17,18 @@ use Traversable;
  */
 trait CollectionTrait
 {
+    public function normalize(callable ...$callback): static
+    {
+        $input = $this->toArray();
+        foreach ($callback as $normalizer) {
+            $input = array_map($normalizer, $input);
+        }
+
+        return new static($input);
+    }
+
     //CORE
+
     /**
      * @return Value[]
      */

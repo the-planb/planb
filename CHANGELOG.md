@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/the-planb/planb/compare/v1.0.0...v1.1.0) (2025-02-23)
+
+
+### Features
+
+* From Cartesian ([ea99111](https://github.com/the-planb/planb/commit/ea99111583053e8fb9860626f738306bc6f748a7))
+* Method TryFrom ([be87da4](https://github.com/the-planb/planb/commit/be87da4cbcfb503c2df850b4907ea06a6e561901))
+* Método Normalizer ([b5847f4](https://github.com/the-planb/planb/commit/b5847f4b01f63d11deed39d082de4ab91f4c2a6c))
+* Upgrade symfony 7.1 y phpunit 11.4 ([c0d687c](https://github.com/the-planb/planb/commit/c0d687ced888882da2c21ea2df8468f8c78d47ff))
+
 ## 1.0.0 (2024-07-25)
 
 

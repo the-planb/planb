@@ -9,6 +9,7 @@ use PlanB\DS\Exception\InvalidElementType;
 use PlanB\DS\Map\MapInterface;
 use PlanB\DS\Traits\CollectionTrait;
 use PlanB\DS\Vector\VectorInterface;
+use Throwable;
 
 /**
  * @template Key of string|int
@@ -51,6 +52,16 @@ abstract class Collection implements CollectionInterface
     {
         return new static($input, $mapping);
     }
+
+    public static function tryFrom(iterable $input = [], callable $mapping = null): null|static
+    {
+        try {
+            return new static($input, $mapping);
+        } catch (Throwable) {
+            return null;
+        }
+    }
+
 
     public static function fromCartesian(callable $callback, iterable ...$inputs): static
     {

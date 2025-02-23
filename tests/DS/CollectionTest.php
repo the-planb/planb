@@ -6,6 +6,7 @@ namespace PlanB\Tests\DS;
 
 use Countable;
 use DateTime;
+use Exception;
 use IteratorAggregate;
 use JsonSerializable;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -106,6 +107,19 @@ final class CollectionTest extends TestCase
         ]);
 
         $this->assertInstanceOf(CollectionInterface::class, $collection);
+    }
+
+    public function test_it_returns_null_when_fails_on_creation()
+    {
+        $collection = Vector::tryFrom([1, 2, 3]);
+
+        $this->assertNotNull($collection);
+        
+        $collection = Vector::tryFrom([1, 2, 3], function () {
+            throw new Exception();
+        });
+
+        $this->assertNull($collection);
     }
 
     public function test_it_is_normalizable()

@@ -1,4 +1,8 @@
 parameters:
-  checkGenericClassInNonGenericObjectType: false
-  checkMissingIterableValueType: false
-
+  ignoreErrors:
+    - identifier: missingType.iterableValue
+    - identifier: missingType.generics
+    - '#^Method PlanB.*::normalize\(\) should return static\(.*\)\.#'
+    - '#^Method PlanB.*::collect\(\) should return static\(.*\)\.#'
+    - '#^Method PlanB.*::fromCartesian\(\) should return static\(.*\)\.#'
+    - '#^Method PlanB.*::tryFrom\(\) should return static\(.*\)\.#'

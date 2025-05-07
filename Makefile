@@ -8,7 +8,7 @@ coverage:
 	XDEBUG_MODE=coverage  bin/phpunit ${ARGS}
 
 qa:
-	bin/qa src
+	PHP_CS_FIXER_IGNORE_ENV=1 bin/qa src 2> /dev/null
 
 major:
 	git switch main

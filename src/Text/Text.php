@@ -4,7 +4,7 @@ namespace PlanB\Text;
 
 final class Text
 {
-    public static function explode(string $text, string $separator = null, int $limit = null): TextList
+    public static function explode(string $text, ?string $separator = null, ?int $limit = null): TextList
     {
         if (is_null($separator)) {
             return self::split($text, '/\s+/', $limit ?? +-1);

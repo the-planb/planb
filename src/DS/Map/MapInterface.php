@@ -26,11 +26,11 @@ interface MapInterface extends CollectionInterface
 
     public function mapKeys(callable $callback): static;
 
-    public function ksort(callable $comparison = null): static;
+    public function ksort(?callable $comparison = null): static;
 
-    public function diffKeys(iterable $input, callable $comparison = null): static;
+    public function diffKeys(iterable $input, ?callable $comparison = null): static;
 
-    public function intersect(iterable $input, callable $comparison = null): static;
+    public function intersect(iterable $input, ?callable $comparison = null): static;
 
-    public function intersectKeys(iterable $input, callable $comparison = null): static;
+    public function intersectKeys(iterable $input, ?callable $comparison = null): static;
 }

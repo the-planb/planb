@@ -12,7 +12,7 @@ use PlanB\Type\ArrayValue;
 
 interface CollectionInterface extends Countable, IteratorAggregate, ArrayValue, JsonSerializable
 {
-    public static function collect(iterable $input = [], callable $mapping = null): static;
+    public static function collect(iterable $input = [], ?callable $mapping = null): static;
 
     public function normalize(callable $callback): static;
 
@@ -56,11 +56,11 @@ interface CollectionInterface extends Countable, IteratorAggregate, ArrayValue, 
 
     public function each(callable $callback): static;
 
-    public function filter(callable $condition = null): static;
+    public function filter(?callable $condition = null): static;
 
-    public function sort(callable $comparison = null): static;
+    public function sort(?callable $comparison = null): static;
 
-    public function diff(iterable $input, callable $comparison = null): static;
+    public function diff(iterable $input, ?callable $comparison = null): static;
 
     public function unique(): static;
 

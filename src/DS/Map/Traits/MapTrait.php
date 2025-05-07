@@ -100,7 +100,7 @@ trait MapTrait
     /**
      * @param null|callable(Key, Key): int $comparison
      */
-    public function ksort(callable $comparison = null): static
+    public function ksort(?callable $comparison = null): static
     {
         $data = $this->toArray();
 
@@ -119,7 +119,7 @@ trait MapTrait
      * @param Value[] $input
      * @param null|callable(Key, Key): int $comparison
      */
-    public function diffKeys(iterable $input, callable $comparison = null): static
+    public function diffKeys(iterable $input, ?callable $comparison = null): static
     {
         $input = iterable_to_array($input);
         if (is_null($comparison)) {
@@ -137,7 +137,7 @@ trait MapTrait
      * @param Value[] $input
      * @param null|callable(Value, Value): int $comparison
      */
-    public function intersect(iterable $input, callable $comparison = null): static
+    public function intersect(iterable $input, ?callable $comparison = null): static
     {
         $input = iterable_to_array($input);
         if (is_null($comparison)) {
@@ -155,7 +155,7 @@ trait MapTrait
      * @param Value[] $input
      * @param null|callable(Key, Key): int $comparison
      */
-    public function intersectKeys(iterable $input, callable $comparison = null): static
+    public function intersectKeys(iterable $input, ?callable $comparison = null): static
     {
         $input = iterable_to_array($input);
         if (is_null($comparison)) {

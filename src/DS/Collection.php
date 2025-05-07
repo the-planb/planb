@@ -34,7 +34,7 @@ abstract class Collection implements CollectionInterface
      * @param Value[] $input
      * @param string[] $types
      */
-    public function __construct(iterable $input = [], callable $mapping = null, array $types = [])
+    public function __construct(iterable $input = [], ?callable $mapping = null, array $types = [])
     {
         $this->types = ElementType::fromClass(static::class)
             ->merge(...$types)
@@ -48,12 +48,12 @@ abstract class Collection implements CollectionInterface
         $this->data = $this->sanitize($input);
     }
 
-    public static function collect(iterable $input = [], callable $mapping = null): static
+    public static function collect(iterable $input = [], ?callable $mapping = null): static
     {
         return new static($input, $mapping);
     }
 
-    public static function tryFrom(iterable $input = [], callable $mapping = null): null|static
+    public static function tryFrom(iterable $input = [], ?callable $mapping = null): null|static
     {
         try {
             return new static($input, $mapping);

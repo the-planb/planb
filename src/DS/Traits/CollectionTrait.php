@@ -308,7 +308,7 @@ trait CollectionTrait
     /**
      * @param null|callable(Value, Key): bool $condition
      */
-    public function filter(callable $condition = null): static
+    public function filter(?callable $condition = null): static
     {
         if (null === $condition) {
             $input = array_filter($this->data);
@@ -324,7 +324,7 @@ trait CollectionTrait
     /**
      * @param null|callable(Value, Key): int $comparison
      */
-    public function sort(callable $comparison = null): static
+    public function sort(?callable $comparison = null): static
     {
         $data = $this->toArray();
 
@@ -343,7 +343,7 @@ trait CollectionTrait
      * @param Value[] $input
      * @param null|callable(Value, Value): int $comparison
      */
-    public function diff(iterable $input, callable $comparison = null): static
+    public function diff(iterable $input, ?callable $comparison = null): static
     {
         $input = iterable_to_array($input);
         if (is_null($comparison)) {
@@ -361,7 +361,7 @@ trait CollectionTrait
      * @param null|callable(Value, Key): mixed $callback
      * @param bool $strict
      */
-    public function unique(callable $callback = null, bool $strict = false): static
+    public function unique(?callable $callback = null, bool $strict = false): static
     {
         $callback ??= fn (mixed $item, string|int $key) => $item;
 

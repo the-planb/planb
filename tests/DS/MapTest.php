@@ -29,7 +29,7 @@ final class MapTest extends TestCase
 
     public function test_it_can_be_instantiate_using_a_mapping_function()
     {
-        $vector = Map::collect([1, 2, 3], fn(int $i) => str_repeat('*', $i));
+        $vector = Map::collect([1, 2, 3], fn (int $i) => str_repeat('*', $i));
         $this->assertEquals([
             '*',
             '**',
@@ -113,7 +113,7 @@ final class MapTest extends TestCase
         $collection = $this->give_me_a_map($input);
 
         //compara el reverso de las cadenas
-        $comparison = fn(string $first, string $second) => strrev($first) <=> strrev($second);
+        $comparison = fn (string $first, string $second) => strrev($first) <=> strrev($second);
 
         $sorted = $collection->ksort($comparison);
 
@@ -131,7 +131,7 @@ final class MapTest extends TestCase
             'D' => 'VALUE/D',
         ]);
 
-        $callback = fn(string $value) => strtoupper($value);
+        $callback = fn (string $value) => strtoupper($value);
         $mapped = $map->map($callback);
 
         $this->assertEquals($expected, $mapped);
@@ -150,7 +150,7 @@ final class MapTest extends TestCase
             'd' => 'value/D',
         ]);
 
-        $callback = fn(string $value, string $key) => strtolower($key);
+        $callback = fn (string $value, string $key) => strtolower($key);
         $mapped = $map->mapKeys($callback);
 
         $this->assertEquals($expected, $mapped);

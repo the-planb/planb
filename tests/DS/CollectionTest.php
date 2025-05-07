@@ -114,7 +114,7 @@ final class CollectionTest extends TestCase
         $collection = Vector::tryFrom([1, 2, 3]);
 
         $this->assertNotNull($collection);
-        
+
         $collection = Vector::tryFrom([1, 2, 3], function () {
             throw new Exception();
         });
@@ -182,7 +182,7 @@ final class CollectionTest extends TestCase
 
     public static function countProvider(): array
     {
-        $data = fn(int $total) => array_fill(0, $total, '*');
+        $data = fn (int $total) => array_fill(0, $total, '*');
 
         return [
             [$data(0), 0, true],
@@ -229,7 +229,7 @@ final class CollectionTest extends TestCase
     {
         $collection = $this->give_me_a_collection();
 
-        $condition = fn(string $value) => str_ends_with($value, 'B');
+        $condition = fn (string $value) => str_ends_with($value, 'B');
         $this->assertSame('value/B', $collection->firstThat($condition));
 
         $this->assertCollectionHasNotChange($collection);
@@ -238,7 +238,7 @@ final class CollectionTest extends TestCase
     public function test_firstThat_method_returns_null_when_no_element_meets_the_condition()
     {
         $collection = $this->give_me_a_collection();
-        $condition = fn(string $value) => str_ends_with($value, 'X');
+        $condition = fn (string $value) => str_ends_with($value, 'X');
         $founded = $collection->firstThat($condition);
         $this->assertNull($founded);
     }
@@ -246,7 +246,7 @@ final class CollectionTest extends TestCase
     public function test_firstThat_method_returns_null_when_collection_is_empty()
     {
         $collection = $this->give_me_a_collection([]);
-        $condition = fn(string $value) => str_ends_with($value, 'X');
+        $condition = fn (string $value) => str_ends_with($value, 'X');
         $founded = $collection->firstThat($condition);
         $this->assertNull($founded);
     }
@@ -270,7 +270,7 @@ final class CollectionTest extends TestCase
     {
         $collection = $this->give_me_a_collection();
 
-        $condition = fn(string $value) => str_starts_with($value, 'value');
+        $condition = fn (string $value) => str_starts_with($value, 'value');
         $this->assertSame('value/D', $collection->lastThat($condition));
 
         $this->assertCollectionHasNotChange($collection);
@@ -280,7 +280,7 @@ final class CollectionTest extends TestCase
     {
         $collection = $this->give_me_a_collection();
 
-        $condition = fn(string $value) => str_ends_with($value, 'X');
+        $condition = fn (string $value) => str_ends_with($value, 'X');
         $founded = $collection->lastThat($condition);
         $this->assertNull($founded);
     }
@@ -289,7 +289,7 @@ final class CollectionTest extends TestCase
     {
         $collection = $this->give_me_a_collection([]);
 
-        $condition = fn(string $value) => str_ends_with($value, 'X');
+        $condition = fn (string $value) => str_ends_with($value, 'X');
         $founded = $collection->lastThat($condition);
         $this->assertNull($founded);
     }
@@ -419,7 +419,7 @@ final class CollectionTest extends TestCase
     public function test_it_can_take_the_first_elements_that_meet_a_condition()
     {
         $collection = $this->give_me_a_collection();
-        $condition = fn(string $value) => $value !== 'value/C';
+        $condition = fn (string $value) => $value !== 'value/C';
         $expected = $this->give_me_a_collection([
             'A' => 'value/A',
             'B' => 'value/B',
@@ -432,7 +432,7 @@ final class CollectionTest extends TestCase
     public function test_it_can_drop_the_first_elements_that_meet_a_condition()
     {
         $collection = $this->give_me_a_collection();
-        $condition = fn(string $value) => $value !== 'value/C';
+        $condition = fn (string $value) => $value !== 'value/C';
         $expected = $this->give_me_a_collection([
             'C' => 'value/C',
             'D' => 'value/D',
@@ -474,9 +474,9 @@ final class CollectionTest extends TestCase
     {
         $collection = $this->give_me_a_collection();
 
-        $conditionA = fn(string $value) => str_ends_with($value, '/A');
-        $conditionB = fn(string $value) => str_ends_with($value, '/B');
-        $conditionC = fn(string $value) => str_ends_with($value, '/X');
+        $conditionA = fn (string $value) => str_ends_with($value, '/A');
+        $conditionB = fn (string $value) => str_ends_with($value, '/B');
+        $conditionC = fn (string $value) => str_ends_with($value, '/X');
 
         $this->assertTrue($collection->some($conditionA));
         $this->assertTrue($collection->some($conditionB));
@@ -487,8 +487,8 @@ final class CollectionTest extends TestCase
     {
         $collection = $this->give_me_a_collection();
 
-        $conditionYes = fn(string $value) => str_starts_with($value, 'value/');
-        $conditionNO = fn(string $value) => str_ends_with($value, '/A');
+        $conditionYes = fn (string $value) => str_starts_with($value, 'value/');
+        $conditionNO = fn (string $value) => str_ends_with($value, '/A');
 
         $this->assertTrue($collection->every($conditionYes));
         $this->assertFalse($collection->every($conditionNO));
@@ -529,7 +529,7 @@ final class CollectionTest extends TestCase
         $input['B2'] = 'value/B/X';
         $input['C2'] = 'value/C/X';
 
-        $condition = fn(string $_, string $key) => !str_ends_with($key, '2');
+        $condition = fn (string $_, string $key) => !str_ends_with($key, '2');
 
         $collection = $this->give_me_a_collection($input);
         $filtered = $collection->filter($condition);
@@ -558,7 +558,7 @@ final class CollectionTest extends TestCase
         $collection = $this->give_me_a_collection($input);
 
         //compara el reverso de las cadenas
-        $comparison = fn(string $first, string $second) => strrev($first) <=> strrev($second);
+        $comparison = fn (string $first, string $second) => strrev($first) <=> strrev($second);
 
         $sorted = $collection->sort($comparison);
 
@@ -644,7 +644,7 @@ final class CollectionTest extends TestCase
             'C' => 'AAAAAAAA',
         ]);
 
-        $this->assertEquals($expected, $collection->unique(fn(string $value) => strlen($value)));
+        $this->assertEquals($expected, $collection->unique(fn (string $value) => strlen($value)));
         $this->assertNotSame($expected, $collection);
     }
 
@@ -740,7 +740,7 @@ final class CollectionTest extends TestCase
             'value/B',
         ]);
 
-        $callback = fn($value, $key) => array_fill(0, 3, $value);
+        $callback = fn ($value, $key) => array_fill(0, 3, $value);
         $this->assertEquals($expected, $collection->flatMap($callback));
     }
 

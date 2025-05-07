@@ -45,7 +45,7 @@ final class DSTest extends TestCase
 
     public function test_it_text_collect_alias_works_when_has_a_callback()
     {
-        $text = textList(['a', 'b', 'c'], fn(string $value) => strtoupper($value));
+        $text = textList(['a', 'b', 'c'], fn (string $value) => strtoupper($value));
         $this->assertInstanceOf(TextList::class, $text);
 
         $this->assertEquals(['A', 'B', 'C'], $text->toArray());

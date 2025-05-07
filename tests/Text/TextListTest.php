@@ -19,7 +19,7 @@ class TextListTest extends TestCase
 
     public function test_it_implode_a_string_list_properly()
     {
-        $text = TextList::collect(['a', 'b', 'c'], fn(string $value) => strtoupper($value));
+        $text = TextList::collect(['a', 'b', 'c'], fn (string $value) => strtoupper($value));
         $this->assertEquals('ABC', $text->implode(''));
     }
 }

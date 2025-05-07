@@ -29,7 +29,7 @@
     "bin-dir": "bin"
   },
   "require": {
-    "php": ">=8.2",
+    "php": ">=8.4",
     "ext-ctype": "*",
     "ext-iconv": "*",
     "dg/bypass-finals": "^1.8",
@@ -38,7 +38,7 @@
     "symfony/string": "^7.1"
   },
   "require-dev": {
-    "symfony/var-dumper": "^7.1",
+    "symfony/var-dumper": "^7.2",
     "phpspec/prophecy-phpunit": "^2.0",
     "phpunit/phpunit": "^11.4"
   }

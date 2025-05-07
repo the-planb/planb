@@ -32,6 +32,7 @@ abstract class Collection implements CollectionInterface
 
     /**
      * @param Value[] $input
+     * @param (callable(mixed, int|string): Value)|null $mapping
      * @param string[] $types
      */
     public function __construct(iterable $input = [], ?callable $mapping = null, array $types = [])
@@ -48,6 +49,10 @@ abstract class Collection implements CollectionInterface
         $this->data = $this->sanitize($input);
     }
 
+    /**
+     * @param Value[] $input
+     * @param (callable(mixed, int|string): Value)|null $mapping
+     */
     public static function collect(iterable $input = [], ?callable $mapping = null): static
     {
         return new static($input, $mapping);
@@ -75,6 +80,10 @@ abstract class Collection implements CollectionInterface
         return new static($temp);
     }
 
+    /**
+     * @param array $input
+     * @return Value[]
+     */
     protected function sanitize(array $input): array
     {
         $data = [];

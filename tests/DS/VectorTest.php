@@ -12,6 +12,7 @@ use PlanB\DS\Vector\VectorImmutableInterface;
 use PlanB\DS\Vector\VectorInterface;
 use PlanB\Tests\DS\Traits\Assertions;
 use PlanB\Tests\DS\Traits\ObjectMother;
+
 use function array_is_list;
 
 final class VectorTest extends TestCase
@@ -30,7 +31,7 @@ final class VectorTest extends TestCase
 
     public function test_it_can_be_instantiate_using_a_mapping_function()
     {
-        $vector = Vector::collect([1, 2, 3], fn(int $i) => str_repeat('*', $i));
+        $vector = Vector::collect([1, 2, 3], fn (int $i) => str_repeat('*', $i));
         $this->assertEquals([
             '*',
             '**',
@@ -65,7 +66,7 @@ final class VectorTest extends TestCase
             'VALUE/D',
         ]);
 
-        $callback = fn(string $value, int $key) => strtoupper($value);
+        $callback = fn (string $value, int $key) => strtoupper($value);
         $mapped = $vector->map($callback);
 
         $this->assertEquals($expected, $mapped);
@@ -78,7 +79,7 @@ final class VectorTest extends TestCase
     {
         $vector = $this->give_me_a_vector();
 
-        $map = $vector->toMap(fn(string $value) => substr($value, -1));
+        $map = $vector->toMap(fn (string $value) => substr($value, -1));
 
         $expected = $this->give_me_a_map([
             'A' => 'value/A',
